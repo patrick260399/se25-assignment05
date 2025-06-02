@@ -18,8 +18,13 @@ public class TestFixtures {
             new Pos("Lidl (Nürnberger Str.)", "Description 1", PosType.VENDING_MACHINE, CampusType.ZAPF, "Nürnberger Str.", "3a", 95448, "Bayreuth")
     );
 
-    // TODO: fill this list.
-    private static final List<User> USER_LIST = List.of();
+    //  fill this list.
+    private static final List<User> USER_LIST = List.of(
+            new User( "maxmustermann", "max@gmail.com", "Max", "Muster"),
+            new User( "erikaschmidt", "erika@gmail.com", "Erika", "Tauber"),
+            new User( "johndoe", "john@gmail.com", "John", "Schmidt")
+    );
+
 
     public static List<Pos> getPosList() {
         return POS_LIST.stream()
@@ -40,7 +45,9 @@ public class TestFixtures {
     }
 
     public static List<User> createUsers(UserService userService) {
-        // TODO: implement this method
-        return List.of();
+        // implement this method
+        return getUserList().stream()
+                .map(userService::upsert)
+                .collect(Collectors.toList());
     }
 }
